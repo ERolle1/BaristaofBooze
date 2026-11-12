@@ -1,0 +1,220 @@
+.featuredContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 950px;
+  margin: 50px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-family: var(--jakarta);
+}
+
+.randomHeader {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 30px;
+  font-family: var(--playfair);
+  font-weight: 700;
+  background: linear-gradient(90deg, #f8caa5, #ee6e4d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.randomContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: #1a0b22;
+  border: 1px solid rgba(238, 110, 77, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.randomImage {
+  width: 45%;
+  object-fit: cover;
+  display: block;
+  min-height: 350px;
+}
+
+.randomInfoContainer {
+  flex: 1;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.tagBadge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #f8caa5;
+  background: rgba(238, 110, 77, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(238, 110, 77, 0.3);
+}
+
+.goldDivider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #ee6e4d, #f8caa5);
+  margin-bottom: 16px;
+  border-radius: 0%2px;
+}
+
+.featuredDrinkName {
+  font-family: var(--playfair);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+}
+
+.featuredDrinkRecipe {
+  /* font-size: 17px; */
+  font-family: var(--jakarta);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #bfaecb;
+  max-height: 130px;
+  overflow-y: auto;
+  margin: 0 0 24px 0;
+  padding-right: 5px;
+}
+
+.featuredDrinkRecipe::-webkit-scrollbar {
+  width: 4;
+}
+
+.featuredDrinkRecipe::-webkit-scrollbar-thumb {
+  background: rgba(238, 110, 77, 0.3);
+  border-radius: 4px;
+}
+
+.ingredientList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 8px;
+  max-height: 120px;
+  overflow-y: hidden;
+  padding-right: 4px;
+}
+
+.ingredientItem {
+  font-size: 13px;
+  background: rgba(248, 202, 165, 0.1);
+  color: #f8caa5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(248, 202, 165, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ingredientList::-webkit-scrollbar {
+  width: 3px;
+}
+
+.ingredientList::-webkit-scrollbar-thumb {
+  background: rgba(238, 110, 77, 0.3);
+  border-radius: 4px;
+}
+.recipeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ee6e4d, #e05330);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(238, 110, 77, 0.3);
+  margin-top: auto;
+  width: fit-content;
+}
+
+.recipeBtn:hover {
+  background: linear-gradient(135deg, #f37e60, #ee6e4d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(238, 110, 77, 0.4);
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+  .randomContainer {
+    flex-direction: column;
+  }
+
+  .randomImage {
+    width: 100%;
+    min-height: 250px;
+    max-height: 300px;
+  }
+
+  .randomInfoContainer {
+    padding: 25px 20px;
+  }
+
+  .randomHeader {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .featuredDrinkName {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .featuredContainer {
+    margin: 30px auto;
+    padding: 0 12px;
+  }
+
+  .randomInfoContainer {
+    padding: 20px 15px;
+  }
+
+  .ingredientList {
+    grid-template-columns: 1fr;
+  }
+
+  .randomHeader {
+    font-size: 22px;
+  }
+
+  .featuredDrinkName {
+    font-size: 22px;
+  }
+
+  .featuredDrinkRecipe {
+    font-size: 14px;
+    max-height: 110px;
+  }
+}
