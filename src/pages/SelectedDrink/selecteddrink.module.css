@@ -1,0 +1,152 @@
+.pageContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.drinkCard {
+  display: flex;
+  flex-direction: row;
+  background: #1a0b22;
+  border: 1px solid rgba(238, 110, 77, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  gap: 30px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.imageWrapper {
+  flex: 1;
+  max-width: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.drinkImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.drinkImage:hover {
+  transform: scale(1.03);
+}
+
+.drinkInfo {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 15px;
+}
+
+.drinkCategory {
+  display: inline-block;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ee6e4d;
+  background: rgba(238, 110, 77, 0.1);
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  align-self: flex-start;
+  border: 1px solid rgba(238, 110, 77, 0.2);
+}
+
+.drinkName {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 15px 0;
+  line-height: 1.1;
+}
+
+.tagsRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tag {
+  font-family: var(--jakarta);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #bfaec6;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f8caa5;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.ingredientsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--jakarta);
+}
+
+.ingredientItem {
+  font-size: 14px;
+  color: #dfdada;
+  padding: 4px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.drinkRecipe {
+  font-family: var(--jakarta);
+  color: #a098a8;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.loadingText {
+  color: #f8caa5;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+  .drinkCard {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .imageWrapper {
+    max-width: 100%;
+    height: 300px;
+  }
+
+  .drinkName {
+    font-size: 28px;
+  }
+}
