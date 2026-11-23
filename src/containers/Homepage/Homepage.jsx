@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 import styles from "../Homepage/homepage.module.css";
 
-export const Homepage = ({ getDrinks, setGetDrinks }) => {
+export const Homepage = ({ getDrinks }) => {
   return (
     <>
       {getDrinks && getDrinks.length > 0 && (
-        <div className={styles.searchResults}>
+        <div id="search-results" className={styles.searchResults}>
           <div className={styles.sectionDivider}>
             <span className={styles.dividerLine}></span>
             <h3 className={styles.resultsTitle}>Search Results</h3>
@@ -15,27 +15,34 @@ export const Homepage = ({ getDrinks, setGetDrinks }) => {
           <div className={styles.drinkContainer}>
             {getDrinks.map((drink) => {
               return (
-                <Link to={`/selectedDrink/${drink.idDrink}`}>
-                  {console.log(drink.idDrink)}
-                  <div key={drink.idDrink} className={styles.drinkCard}>
-                    <img
-                      className={styles.drinkImage}
-                      src={drink.strDrinkThumb}
-                      alt=""
-                    />
-                    {console.log(drink.idDrink)}
-                    <div className={styles.drinkInfo}>
+                <Link
+                  key={drink.idDrink}
+                  to={`/selectedDrink/${drink.idDrink}`}
+                  className={styles.drinkCardLink}
+                >
+                  <article className={styles.drinkCard}>
+                    <div className={styles.imageWrapper}>
+                      <img
+                        className={styles.drinkImage}
+                        src={drink.strDrinkThumb}
+                        alt={`${drink.strDrink} cocktail`}
+                      />
                       {drink.strCategory && (
                         <span className={styles.drinkCategory}>
                           {drink.strCategory}
                         </span>
                       )}
-                      <h4 className={styles.drinkName}>{drink.strDrink}</h4>
-                      <p className={styles.drinkRecipe}>
-                        {drink.strInstructions}
-                      </p>
                     </div>
-                  </div>
+                    <div className={styles.drinkInfo}>
+                      <h4 className={styles.drinkName}>{drink.strDrink}</h4>
+                      {drink.strGlass && (
+                        <p className={styles.drinkGlass}>
+                          Served in: {drink.strGlass}
+                        </p>
+                      )}
+                      <span className={styles.viewRecipe}>View recipe →</span>
+                    </div>
+                  </article>
                 </Link>
               );
             })}

@@ -135,9 +135,204 @@
   font-weight: 400;
 }
 
+.suggestions {
+  margin-top: 58px;
+  padding: 28px;
+  border: 1px solid rgba(248, 202, 165, 0.14);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(238, 110, 77, 0.16), transparent 34%),
+    linear-gradient(145deg, rgba(26, 11, 34, 0.98), rgba(15, 6, 19, 0.98));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+.suggestionsHeader {
+  position: relative;
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.suggestionsEyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #ee6e4d;
+  font-family: var(--jakarta);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.suggestionsHeader h3 {
+  color: #fff;
+  font-family: var(--playfair);
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.suggestionsHeader p {
+  color: #a098a8;
+  font-family: var(--jakarta);
+  font-size: 14px;
+}
+
+.suggestionsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.suggestionCard {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(248, 202, 165, 0.16);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.28s ease, border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.suggestionCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(238, 110, 77, 0.72);
+  box-shadow: 0 14px 28px rgba(238, 110, 77, 0.14);
+}
+
+.suggestionImage {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.suggestionCard:hover .suggestionImage {
+  transform: scale(1.055);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.suggestionInfo {
+  padding: 14px;
+  text-align: left;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 11, 34, 0.96),
+    rgba(15, 6, 19, 0.98)
+  );
+}
+
+.suggestionInfo h4 {
+  min-height: 38px;
+  font-family: var(--playfair);
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.suggestionInfo span {
+  color: #ee6e4d;
+  font-family: var(--jakarta);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.batchScaler {
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid rgba(238, 110, 77, 0.22);
+  border-radius: 12px;
+  background: rgba(238, 110, 77, 0.06);
+}
+
+.guestControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #dfdada;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.guestControl input {
+  width: 84px;
+  height: 38px;
+  border: 1px solid rgba(238, 110, 77, 0.35);
+  border-radius: 8px;
+  background: #0f0613;
+  padding: 0 10px;
+}
+
+.scaledList {
+  display: grid;
+  gap: 6px;
+}
+
+.scaledList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #bfaec6;
+  font-family: var(--jakarta);
+  font-size: 13px;
+}
+
+.scaledList strong {
+  color: #f8caa5;
+  white-space: nowrap;
+}
+
+.dilutionNote {
+  margin-top: 12px;
+  color: #f8caa5;
+  font-family: var(--jakarta);
+  font-size: 12px;
+  border-top: 1px solid rgba(248, 202, 165, 0.12);
+  padding-top: 10px;
+}
+
+.partyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.partyActions button,
+.partyMenuLink {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(238, 110, 77, 0.35);
+  border-radius: 8px;
+  background: rgba(238, 110, 77, 0.12);
+  color: #f8caa5;
+  padding: 10px 12px;
+  font-family: var(--jakarta);
+  font-size: 12px;
+}
+
+.partyActions button {
+  cursor: pointer;
+}
+
+.partyMenuLink {
+  text-decoration: none;
+}
+
+.partyMenuMessage {
+  margin-top: 10px;
+  color: #f8caa5;
+  font-family: var(--jakarta);
+  font-size: 13px;
+}
+
 @media screen and (max-width: 768px) {
   .drinkCard {
     flex-direction: column;
+    gap: 18px;
     padding: 20px;
   }
 
@@ -148,5 +343,111 @@
 
   .drinkName {
     font-size: 28px;
+  }
+
+  .suggestions {
+    padding: 20px 14px;
+  }
+
+  .suggestionsHeader h3 {
+    font-size: 27px;
+  }
+
+  .suggestionsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .pageContainer {
+    padding: 24px 12px;
+  }
+
+  .drinkCard {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .imageWrapper {
+    height: 230px;
+  }
+
+  .drinkInfo {
+    padding: 4px 2px;
+  }
+
+  .drinkName {
+    font-size: 27px;
+  }
+
+  .tagsRow {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .sectionTitle {
+    font-size: 17px;
+  }
+
+  .batchScaler {
+    padding: 12px;
+  }
+
+  .guestControl {
+    align-items: flex-start;
+  }
+
+  .partyActions button,
+  .partyMenuLink {
+    min-height: 44px;
+  }
+
+  .suggestions {
+    margin-top: 32px;
+    padding: 18px 14px;
+  }
+
+  .suggestionsHeader h3 {
+    font-size: 24px;
+  }
+
+  .suggestionsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .suggestionCard {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .suggestionImage {
+    height: 100%;
+    min-height: 104px;
+  }
+
+  .suggestionInfo {
+    padding: 12px;
+  }
+
+  .suggestionInfo h4 {
+    min-height: 0;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .imageWrapper {
+    height: 200px;
+  }
+
+  .suggestionCard {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .suggestionInfo {
+    padding: 10px;
   }
 }

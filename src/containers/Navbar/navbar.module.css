@@ -25,6 +25,11 @@
   border: 1px solid rgba(238, 110, 77, 0.2);
 }
 
+.logoLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
 .headerOpening {
   font-size: 50px;
   font-weight: 700;
@@ -98,6 +103,37 @@
   box-shadow: 0 0 0 3px rgba(238, 110, 77, 0.3);
 }
 
+.searchBtn:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.searchMessage {
+  min-height: 20px;
+  margin-top: 10px;
+  color: #f8caa5;
+  font-family: var(--jakarta);
+  font-size: 13px;
+}
+
+.partyMenuLink {
+  display: inline-flex;
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: 1px solid rgba(238, 110, 77, 0.4);
+  border-radius: 999px;
+  background: rgba(238, 110, 77, 0.12);
+  color: #f8caa5;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.partyMenuLink:hover {
+  background: rgba(238, 110, 77, 0.2);
+}
+
 .searchBtn:hover {
   background: linear-gradient(135deg, #f37e60, #ee6e4d);
   transform: translateY(-1px);
@@ -110,45 +146,59 @@
 
 @media screen and (max-width: 640px) {
   .navbar {
-    padding: 20px 15px;
+    padding: 24px 16px;
   }
 
   .headerOpening {
-    font-size: 30px;
+    font-size: clamp(27px, 7vw, 34px);
     margin-bottom: 20px;
   }
 
+  .subtitle {
+    margin-bottom: 24px;
+  }
+
   .searchContainer {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    max-width: 340px;
-    width: 100%;
-    margin: 0 auto;
+    align-items: stretch;
+    gap: 12px;
+    max-width: 480px;
   }
 
   .searchInput {
     flex: none;
-    width: 100% !important;
-    height: 50px !important;
-    padding: 0 18px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-sizing: border-box;
-
-    margin-bottom: 20px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
   }
 
   .searchBtn {
     flex: none;
     width: 100%;
-    max-width: 200px;
-    height: 45px;
+    min-height: 48px;
     padding: 0 16px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
     border-radius: 8px;
+  }
+
+  .partyMenuLink {
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .navbar {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .navbar_logo {
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .headerOpening {
+    font-size: 26px;
   }
 }

@@ -17,3 +17,201 @@ li {
   --jakarta: font-family: "Plus Jakarta Sans", sans-serif;
   --playfair: font-family: "Playfair Display", serif;
 }
+
+.pantrySection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 1px solid rgba(238, 110, 77, 0.25);
+  border-radius: 16px;
+  background: #1a0b22;
+  box-sizing: border-box;
+}
+
+.pantryHeader {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pantryHeader h3 {
+  font-family: var(--playfair);
+  font-size: 30px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.pantryHeader p {
+  color: #a098a8;
+  font-family: var(--jakarta);
+}
+
+.pantryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pantryOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid rgba(248, 202, 165, 0.15);
+  border-radius: 8px;
+  color: #dfdada;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pantryOption input {
+  flex: 0 0 auto;
+  accent-color: #ee6e4d;
+}
+
+.customPantry {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.customPantry input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  border: 1px solid rgba(238, 110, 77, 0.35);
+  border-radius: 8px;
+  background: #0f0613;
+  padding: 0 12px;
+  font-family: var(--jakarta);
+}
+
+.customPantry button,
+.selectedPantry button {
+  border: 1px solid rgba(238, 110, 77, 0.35);
+  border-radius: 8px;
+  background: rgba(238, 110, 77, 0.15);
+  color: #f8caa5;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-family: var(--jakarta);
+}
+
+.customPantry button:last-child {
+  background: linear-gradient(135deg, #ee6e4d, #e05330);
+  color: #fff;
+  border: none;
+}
+
+.selectedPantry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.selectedPantry button {
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.pantryResults {
+  margin-top: 28px;
+  scroll-margin-top: 20px;
+}
+
+.pantryResults h4 {
+  color: #f8caa5;
+  font-family: var(--playfair);
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.pantryMatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: calc(25% - 8px);
+  margin: 4px;
+  padding: 8px;
+  border: 1px solid rgba(238, 110, 77, 0.2);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.pantryMatch img {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+.pantryMatch span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 768px) {
+  .pantrySection {
+    padding: 20px 15px;
+  }
+
+  .pantryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .customPantry {
+    flex-wrap: wrap;
+  }
+
+  .customPantry input {
+    flex-basis: 100%;
+  }
+
+  .customPantry button {
+    flex: 1;
+  }
+
+  .pantryMatch {
+    width: calc(50% - 8px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pantrySection {
+    margin: 24px auto;
+    padding: 18px 12px;
+  }
+
+  .pantryHeader h3 {
+    font-size: 25px;
+  }
+
+  .pantryGrid {
+    gap: 8px;
+  }
+
+  .pantryOption {
+    gap: 6px;
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .pantryMatch {
+    width: 100%;
+    margin: 4px 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .pantryGrid {
+    grid-template-columns: 1fr;
+  }
+}
