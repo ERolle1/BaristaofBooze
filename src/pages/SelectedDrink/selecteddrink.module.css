@@ -329,6 +329,147 @@
   font-size: 13px;
 }
 
+.makeActions {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 22px;
+}
+
+.makeActions button,
+.madeButton,
+.savePassportButton {
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(238, 110, 77, 0.45);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ee6e4d, #e05330);
+  color: #fff;
+  font-family: var(--jakarta);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.makeActions p,
+.passportMessage {
+  color: #f8caa5;
+  font-family: var(--jakarta);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.makeMode .drinkInfo {
+  font-size: 19px;
+}
+
+.makeMode .sectionTitle {
+  font-size: 23px;
+}
+
+.makeMode .makeChecklist {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.makeMode .makeChecklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 56px;
+  padding: 13px;
+  border: 1px solid rgba(248, 202, 165, 0.16);
+  border-radius: 10px;
+  background: rgba(15, 6, 19, 0.6);
+  color: #fff;
+  font-family: var(--jakarta);
+  font-size: clamp(17px, 2.5vw, 21px);
+  line-height: 1.5;
+}
+
+.makeMode .makeChecklist input {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  accent-color: #ee6e4d;
+}
+
+.makeMode .makeChecklist input:checked + span {
+  color: #a098a8;
+  text-decoration: line-through;
+}
+
+.passport {
+  display: grid;
+  gap: 12px;
+  margin: 10px 0 22px;
+  padding: 18px;
+  border: 1px solid rgba(248, 202, 165, 0.16);
+  border-radius: 12px;
+  background: rgba(238, 110, 77, 0.045);
+}
+
+.passport .sectionTitle {
+  margin: 0;
+}
+
+.madeButton,
+.savePassportButton {
+  justify-self: start;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+}
+
+.rating legend {
+  margin-right: 8px;
+  color: #dfdada;
+  font-family: var(--jakarta);
+  font-size: 13px;
+}
+
+.rating button {
+  padding: 3px;
+  border: 0;
+  background: transparent;
+  color: #f8caa5;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.tastingNote {
+  display: grid;
+  gap: 8px;
+  color: #dfdada;
+  font-family: var(--jakarta);
+  font-size: 13px;
+}
+
+.tastingNote textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid rgba(238, 110, 77, 0.3);
+  border-radius: 8px;
+  background: #0f0613;
+  color: #fff;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.privacyNote {
+  color: #a098a8;
+  font-family: var(--jakarta);
+  font-size: 12px;
+}
+
 @media screen and (max-width: 768px) {
   .drinkCard {
     flex-direction: column;
@@ -401,6 +542,22 @@
   .partyActions button,
   .partyMenuLink {
     min-height: 44px;
+  }
+
+  .makeMode .drinkCard {
+    gap: 12px;
+  }
+
+  .makeMode .makeChecklist label {
+    min-height: 54px;
+  }
+
+  .passport {
+    padding: 14px;
+  }
+
+  .rating {
+    flex-wrap: wrap;
   }
 
   .suggestions {

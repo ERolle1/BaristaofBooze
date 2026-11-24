@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import styles from "../SelectedDrink/selecteddrink.module.css";
 import { Navbar } from "../../containers/Navbar/Navbar";
@@ -6,6 +6,7 @@ import {
   getPartyMenuPath,
   usePartyMenu,
 } from "../../hooks/usePartyMenu";
+import { useTastingPassport } from "../../hooks/useTastingPassport";
 
 export const SelectedDrink = () => {
   //  GET ID FROM PARAM
@@ -16,6 +17,15 @@ export const SelectedDrink = () => {
   const [guestCount, setGuestCount] = useState(8);
   const { drinkIds: partyMenuIds, updateDrinkIds } = usePartyMenu();
   const [partyMenuMessage, setPartyMenuMessage] = useState("");
+  const { records: passportRecords, updateRecord } = useTastingPassport();
+  const [isMaking, setIsMaking] = useState(false);
+  const [checkedSteps, setCheckedSteps] = useState([]);
+  const [wakeLockMessage, setWakeLockMessage] = useState("");
+  const [passportMessage, setPassportMessage] = useState("");
+  const wakeLockRef = useRef(null);
+  const passportRecord = passportRecords[params.id] || {};
+  const tastingRating = passportRecord.rating || 0;
+  const tastingNote = passportRecord.notes || "";
 
   useEffect(() => {
     async function fetchSelected() {
@@ -45,6 +55,59 @@ export const SelectedDrink = () => {
 
     fetchSelected();
   }, [params.id]);
+
+  useEffect(() => {
+    if (!isMaking) {
+      return undefined;
+    }
+
+    let active = true;
+    let requesting = false;
+    const requestWakeLock = async () => {
+      if (!("wakeLock" in navigator)) {
+        setWakeLockMessage("Screen wake lock is unavailable in this browser.");
+        return;
+      }
+      if (requesting || wakeLockRef.current) return;
+
+      requesting = true;
+      try {
+        const lock = await navigator.wakeLock.request("screen");
+        if (!active) {
+          await lock.release();
+          return;
+        }
+        wakeLockRef.current = lock;
+        setWakeLockMessage("Screen will stay awake while you make this drink.");
+      } catch (error) {
+        console.error("Could not keep the screen awake.", error);
+        setWakeLockMessage("Could not keep the screen awake. You can still use making mode.");
+      } finally {
+        requesting = false;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        if (wakeLockRef.current?.released) wakeLockRef.current = null;
+        requestWakeLock();
+      }
+    };
+
+    requestWakeLock();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      active = false;
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      const lock = wakeLockRef.current;
+      wakeLockRef.current = null;
+      if (lock && !lock.released) {
+        lock.release().catch((error) => {
+          console.error("Could not release the screen wake lock.", error);
+        });
+      }
+    };
+  }, [isMaking]);
   // INGREDIENTS AND MEASUREMENTS
 
   const getIngredients = (drink) => {
@@ -93,6 +156,32 @@ export const SelectedDrink = () => {
           scaledMeasure: parseMeasure(item.measure),
         }))
       : [];
+  const recipeSteps = selectedData?.strInstructions
+    ? selectedData.strInstructions
+        .split(/(?<=[.!?])\s+/)
+        .map((step) => step.trim())
+        .filter(Boolean)
+    : [];
+  const toggleMakingStep = (stepId) => {
+    setCheckedSteps((current) =>
+      current.includes(stepId)
+        ? current.filter((id) => id !== stepId)
+        : [...current, stepId],
+    );
+  };
+
+  const passportDetails = selectedData
+    ? {
+        name: selectedData.strDrink,
+        category: selectedData.strCategory || "",
+        alcoholic: selectedData.strAlcoholic || "",
+      }
+    : {};
+
+  const savePassportEntry = (updates) => {
+    updateRecord(params.id, { ...passportDetails, ...updates });
+    setPassportMessage("Passport entry saved on this browser.");
+  };
 
   const hasKnownMeasurements = scaledIngredients.some(
     (item) => item.scaledMeasure != null,
@@ -125,7 +214,7 @@ export const SelectedDrink = () => {
   return (
     <>
       <Navbar navigateToDrink />
-      <main className={styles.pageContainer}>
+      <main className={`${styles.pageContainer} ${isMaking ? styles.makeMode : ""}`}>
         {selectedData ? (
           <>
             <div key={selectedData.idDrink} className={styles.drinkCard}>
@@ -152,26 +241,155 @@ export const SelectedDrink = () => {
 
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>Ingredients</h3>
-                  <ul className={styles.ingredientsList}>
-                    {getIngredients(selectedData).map((item, index) => (
-                      <li key={index} className={styles.ingredientItem}>
-                        <span className={styles.ingredientName}>{item.name}</span>
-                        {item.measure && (
-                          <span className={styles.ingredientMeasure}>
-                            - {item.measure}
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
+                  {isMaking ? (
+                    <ul className={styles.makeChecklist}>
+                      {getIngredients(selectedData).map((item, index) => {
+                        const stepId = `ingredient-${index}`;
+                        return (
+                          <li key={stepId}>
+                            <label>
+                              <input
+                                type="checkbox"
+                                checked={checkedSteps.includes(stepId)}
+                                onChange={() => toggleMakingStep(stepId)}
+                              />
+                              <span>
+                                {item.measure && <strong>{item.measure} </strong>}
+                                {item.name}
+                              </span>
+                            </label>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <ul className={styles.ingredientsList}>
+                      {getIngredients(selectedData).map((item, index) => (
+                        <li key={index} className={styles.ingredientItem}>
+                          <span className={styles.ingredientName}>{item.name}</span>
+                          {item.measure && (
+                            <span className={styles.ingredientMeasure}>
+                              - {item.measure}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>Instructions</h3>
-                  <p className={styles.drinkRecipe}>
-                    {selectedData.strInstructions}
-                  </p>
+                  {isMaking ? (
+                    <ol className={styles.makeChecklist}>
+                      {recipeSteps.map((step, index) => {
+                        const stepId = `instruction-${index}`;
+                        return (
+                          <li key={stepId}>
+                            <label>
+                              <input
+                                type="checkbox"
+                                checked={checkedSteps.includes(stepId)}
+                                onChange={() => toggleMakingStep(stepId)}
+                              />
+                              <span>{step}</span>
+                            </label>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  ) : (
+                    <p className={styles.drinkRecipe}>
+                      {selectedData.strInstructions}
+                    </p>
+                  )}
                 </div>
+
+                <section className={styles.makeActions} aria-label="Hands-free making mode">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWakeLockMessage("");
+                      if (!isMaking) setCheckedSteps([]);
+                      setIsMaking((current) => !current);
+                    }}
+                  >
+                    {isMaking ? "Stop Making" : "Start Making"}
+                  </button>
+                  {isMaking && wakeLockMessage && (
+                    <p role="status">{wakeLockMessage}</p>
+                  )}
+                </section>
+
+                <section className={styles.passport} aria-labelledby="passport-title">
+                  <h3 id="passport-title" className={styles.sectionTitle}>
+                    Cocktail Tasting Passport
+                  </h3>
+                  <button
+                    type="button"
+                    className={styles.madeButton}
+                    aria-pressed={Boolean(passportRecord.made)}
+                    onClick={() =>
+                      savePassportEntry({ made: !passportRecord.made })
+                    }
+                  >
+                    {passportRecord.made ? "Made It ✓" : "Mark as Made It"}
+                  </button>
+                  <fieldset className={styles.rating}>
+                    <legend>Rate this drink</legend>
+                    {Array.from({ length: 5 }, (_, index) => {
+                      const rating = index + 1;
+                      return (
+                        <button
+                          key={rating}
+                          type="button"
+                          aria-label={`Rate ${rating} out of 5`}
+                          aria-pressed={tastingRating === rating}
+                          onClick={() => updateRecord(params.id, {
+                            ...passportDetails,
+                            rating,
+                          })}
+                        >
+                          {rating <= tastingRating ? "★" : "☆"}
+                        </button>
+                      );
+                    })}
+                  </fieldset>
+                  <label className={styles.tastingNote}>
+                    Private tasting notes
+                    <textarea
+                      value={tastingNote}
+                      onChange={(event) =>
+                        updateRecord(params.id, {
+                          ...passportDetails,
+                          notes: event.target.value,
+                        })
+                      }
+                      placeholder="e.g. Use 0.5 oz less simple syrup next time."
+                      rows={3}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    className={styles.savePassportButton}
+                    onClick={() =>
+                      savePassportEntry({
+                        rating: tastingRating,
+                        notes: tastingNote,
+                      })
+                    }
+                  >
+                    Save tasting
+                  </button>
+                  <p className={styles.privacyNote}>
+                    Your rating and notes are stored privately in this browser.
+                  </p>
+                  {passportMessage && (
+                    <p className={styles.passportMessage} role="status">
+                      {passportMessage}
+                    </p>
+                  )}
+                </section>
 
                 <div className={styles.batchScaler}>
                   <h3 className={styles.sectionTitle}>Batch & Party Scaler</h3>

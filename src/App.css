@@ -4,8 +4,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body,
+#root {
+  min-height: 100vh;
   background-color: #0f0613;
   color: white;
+}
+
+input,
+textarea,
+select {
+  color: inherit;
 }
 
 li {
@@ -158,6 +169,118 @@ li {
   overflow-wrap: anywhere;
 }
 
+.learningSection,
+.passportProgress {
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 28px;
+  border: 1px solid rgba(238, 110, 77, 0.25);
+  border-radius: 16px;
+  background: linear-gradient(130deg, #1a0b22, rgba(45, 20, 42, 0.95));
+  font-family: var(--jakarta);
+}
+
+.learningSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.learningEyebrow {
+  margin-bottom: 7px;
+  color: #ee6e4d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.learningSection h2,
+.passportHeading h2 {
+  margin-bottom: 7px;
+  font-family: var(--playfair);
+  font-size: 28px;
+  color: #fff;
+}
+
+.learningSection p:not(.learningEyebrow),
+.passportHeading > p,
+.passportPrivacy {
+  color: #a098a8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.studyLink {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ee6e4d, #e05330);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.passportHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.badgeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.skillBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 82px;
+  padding: 14px;
+  border: 1px solid rgba(248, 202, 165, 0.12);
+  border-radius: 12px;
+  background: rgba(15, 6, 19, 0.55);
+}
+
+.skillBadge > span {
+  color: #796c7d;
+  font-size: 24px;
+}
+
+.skillBadgeEarned {
+  border-color: rgba(238, 110, 77, 0.5);
+  background: rgba(238, 110, 77, 0.1);
+}
+
+.skillBadgeEarned > span {
+  color: #f8caa5;
+}
+
+.skillBadge h3 {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.skillBadge p {
+  color: #a098a8;
+  font-size: 12px;
+}
+
+.passportPrivacy {
+  margin-top: 14px;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 768px) {
   .pantrySection {
     padding: 20px 15px;
@@ -181,6 +304,15 @@ li {
 
   .pantryMatch {
     width: calc(50% - 8px);
+  }
+
+  .badgeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .learningSection {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

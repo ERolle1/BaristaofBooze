@@ -4,9 +4,33 @@ import { Homepage } from "../../containers/Homepage/Homepage";
 
 import { Navbar } from "../../containers/Navbar/Navbar";
 import { FeaturedDrink } from "../../containers/FeaturedDrink/FeaturedDrink";
+import { useTastingPassport } from "../../hooks/useTastingPassport";
+
+const skillBadges = [
+  {
+    name: "Negroni Family Explorer",
+    qualifies: (record) =>
+      ["negroni", "boulevardier", "americano", "white negroni"].includes(
+        (record.name || "").toLowerCase(),
+      ),
+  },
+  {
+    name: "Tiki Apprentice",
+    qualifies: (record) =>
+      ["mai tai", "zombie", "planter's punch", "painkiller", "hurricane"].includes(
+        (record.name || "").toLowerCase(),
+      ),
+  },
+  {
+    name: "Zero-Proof Mixologist",
+    drinks: [],
+    qualifies: (record) => record.alcoholic === "Non alcoholic",
+  },
+];
 
 export const Home = () => {
   const location = useLocation();
+  const { records } = useTastingPassport();
   const [getDrinks, setGetDrinks] = useState(
     location.state?.searchResults || [],
   );
@@ -94,6 +118,53 @@ export const Home = () => {
       <Navbar setGetDrinks={setGetDrinks} scrollToResults />
 
       <FeaturedDrink />
+
+      <section className="learningSection" aria-labelledby="study-title">
+        <div>
+          <p className="learningEyebrow">Practice makes the perfect pour</p>
+          <h2 id="study-title">Build your bar skills</h2>
+          <p>
+            Drill classic specs, glassware, and garnishes with quick flashcards.
+          </p>
+        </div>
+        <Link className="studyLink" to="/study">
+          Start a study session
+        </Link>
+      </section>
+
+      <section className="passportProgress" aria-labelledby="progress-title">
+        <div className="passportHeading">
+          <div>
+            <p className="learningEyebrow">Your tasting passport</p>
+            <h2 id="progress-title">Skill badges</h2>
+          </div>
+          <p>
+            {Object.values(records).filter((record) => record.made).length}{" "}
+            drinks made
+          </p>
+        </div>
+        <div className="badgeGrid">
+          {skillBadges.map((badge) => {
+            const count = Object.values(records).filter(
+              (record) => record.made && badge.qualifies(record),
+            ).length;
+            const earned = count >= 2;
+            return (
+              <article
+                key={badge.name}
+                className={`skillBadge ${earned ? "skillBadgeEarned" : ""}`}
+              >
+                <span aria-hidden="true">{earned ? "✦" : "○"}</span>
+                <div>
+                  <h3>{badge.name}</h3>
+                  <p>{earned ? "Badge earned" : `${count} / 2 drinks made`}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <p className="passportPrivacy">Your ratings and notes stay in this browser.</p>
+      </section>
 
       <section className="pantrySection">
         <div className="pantryHeader">
