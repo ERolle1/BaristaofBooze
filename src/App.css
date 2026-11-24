@@ -25,8 +25,8 @@ li {
 }
 
 :root {
-  --jakarta: font-family: "Plus Jakarta Sans", sans-serif;
-  --playfair: font-family: "Playfair Display", serif;
+  --jakarta: "Plus Jakarta Sans", sans-serif;
+  --playfair: "Playfair Display", serif;
 }
 
 .pantrySection {

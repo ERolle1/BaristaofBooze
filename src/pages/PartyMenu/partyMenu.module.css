@@ -23,7 +23,7 @@
 
 .hero h1 {
   font-family: var(--playfair);
-  font-size: 44px;
+  font-size: 48px;
   margin-bottom: 8px;
 }
 
@@ -74,16 +74,16 @@
 
 .drinkHeader {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr) auto;
-  gap: 18px;
+  grid-template-columns: 190px minmax(0, 1fr) auto;
+  gap: 22px;
   align-items: start;
 }
 
 .image {
-  width: 150px;
-  height: 150px;
+  width: 190px;
+  height: 190px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .info {
@@ -95,20 +95,20 @@
 
 .info h2 {
   font-family: var(--playfair);
-  font-size: 24px;
-  margin-bottom: 8px;
+  font-size: 29px;
+  margin-bottom: 10px;
 }
 
 .instructions {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
   color: #bfaec6;
   font-family: var(--jakarta);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
 
 .recipeToggle {
@@ -117,7 +117,7 @@
   background: transparent;
   color: #ee6e4d;
   font-family: var(--jakarta);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   text-align: left;
   cursor: pointer;
@@ -177,14 +177,14 @@
   margin-bottom: 4px;
   color: #dfdada;
   font-family: var(--jakarta);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .recipeContent p {
   color: #bfaec6;
   font-family: var(--jakarta);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 .info a {
@@ -217,7 +217,7 @@
 .pairings h3 {
   color: #f8caa5;
   font-family: var(--playfair);
-  font-size: 19px;
+  font-size: 21px;
   margin-bottom: 12px;
 }
 
@@ -235,7 +235,7 @@
   gap: 10px;
   color: #dfdada;
   font-family: var(--jakarta);
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -258,13 +258,13 @@
 }
 
 .pairings li {
-  padding: 8px 10px;
+  padding: 10px 12px;
   border: 1px solid rgba(248, 202, 165, 0.15);
   border-radius: 8px;
   background: rgba(248, 202, 165, 0.06);
   color: #dfdada;
   font-family: var(--jakarta);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .addDrink {
@@ -278,15 +278,15 @@
 
 .addDrink h2 {
   font-family: var(--playfair);
-  font-size: 23px;
+  font-size: 25px;
   margin-bottom: 8px;
 }
 
 .addDrink > p {
   color: #a098a8;
   font-family: var(--jakarta);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .searchForm {
@@ -298,14 +298,14 @@
 .searchForm label {
   color: #f8caa5;
   font-family: var(--jakarta);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .searchForm input {
   width: 100%;
   min-width: 0;
-  height: 42px;
-  padding: 0 10px;
+  height: 46px;
+  padding: 0 12px;
   border: 1px solid rgba(238, 110, 77, 0.35);
   border-radius: 8px;
   background: #0f0613;
@@ -314,7 +314,7 @@
 
 .searchForm button,
 .searchResult button {
-  min-height: 38px;
+  min-height: 44px;
   border: 0;
   border-radius: 8px;
   background: linear-gradient(135deg, #ee6e4d, #e05330);
@@ -350,12 +350,12 @@
   align-items: center;
   color: #dfdada;
   font-family: var(--jakarta);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .searchResult img {
-  width: 46px;
-  height: 46px;
+  width: 56px;
+  height: 56px;
   border-radius: 6px;
   object-fit: cover;
 }
@@ -372,12 +372,12 @@
   }
 
   .drinkHeader {
-    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-columns: 150px minmax(0, 1fr);
   }
 
   .image {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
 
   .removeButton {
@@ -388,7 +388,7 @@
 
 @media screen and (max-width: 700px) {
   .hero h1 {
-    font-size: 34px;
+    font-size: 40px;
   }
 
   .layout {
@@ -411,22 +411,22 @@
   }
 
   .drinkHeader {
-    grid-template-columns: 90px minmax(0, 1fr);
+    grid-template-columns: 112px minmax(0, 1fr);
     gap: 12px;
   }
 
   .image {
-    width: 90px;
-    height: 90px;
+    width: 112px;
+    height: 112px;
   }
 
   .info h2 {
-    font-size: 19px;
+    font-size: 23px;
   }
 
   .instructions {
     -webkit-line-clamp: 3;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .removeButton {
@@ -454,27 +454,27 @@
   }
 
   .drinkHeader {
-    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-columns: 88px minmax(0, 1fr);
     gap: 10px;
   }
 
   .image {
-    width: 72px;
-    height: 72px;
+    width: 88px;
+    height: 88px;
   }
 
   .info h2 {
-    font-size: 17px;
+    font-size: 20px;
   }
 
   .searchResult {
-    grid-template-columns: 40px minmax(0, 1fr) auto;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
     gap: 6px;
   }
 
   .searchResult img {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
 }
 
