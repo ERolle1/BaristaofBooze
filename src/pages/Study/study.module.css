@@ -8,10 +8,15 @@
 }
 
 .header,
-.studyPanel {
+.studyPanel,
+.gardenPanel {
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+.studyPanel {
+  max-width: 760px;
 }
 
 .header {
@@ -186,6 +191,153 @@
   justify-content: center;
 }
 
+.pointsEarned {
+  margin-top: 12px;
+  color: #f8caa5;
+  font-weight: 700;
+}
+
+.gardenPanel {
+  margin-top: 24px;
+  padding: clamp(18px, 4vw, 30px);
+  border: 1px solid rgba(135, 190, 123, 0.35);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #152017, #1a0b22);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25);
+}
+
+.gardenHeader,
+.shopItem,
+.bedsHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gardenHeader h2 {
+  margin: 8px 0;
+  font-family: var(--playfair);
+  font-size: clamp(26px, 5vw, 36px);
+}
+
+.gardenHeader > div > p:last-child,
+.bedsHeading p,
+.shopItem p {
+  color: #b7c2b5;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pointsBalance {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(135, 190, 123, 0.35);
+  border-radius: 24px;
+  background: rgba(135, 190, 123, 0.12);
+  color: #d3efbf;
+  font-weight: 700;
+}
+
+.gardenShop,
+.gardenBeds {
+  margin-top: 28px;
+}
+
+.gardenShop h3,
+.bedsHeading h3 {
+  font-family: var(--playfair);
+  font-size: 22px;
+}
+
+.shopItems {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.shopItem {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(135, 190, 123, 0.2);
+  border-radius: 12px;
+  background: rgba(15, 6, 19, 0.45);
+}
+
+.shopItem > span {
+  font-size: 27px;
+}
+
+.shopItem > div {
+  flex: 1;
+}
+
+.shopItem h4 {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.shopItem button,
+.plot button {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(135, 190, 123, 0.4);
+  border-radius: 8px;
+  background: rgba(135, 190, 123, 0.16);
+  color: #d3efbf;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.shopItem button:disabled,
+.plot button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bedsHeading {
+  align-items: baseline;
+}
+
+.plotGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.plot {
+  display: flex;
+  min-height: 160px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(135, 190, 123, 0.22);
+  border-radius: 12px;
+  background: rgba(15, 6, 19, 0.4);
+  text-align: center;
+}
+
+.plotNumber {
+  align-self: flex-start;
+  color: #a098a8;
+  font-size: 11px;
+}
+
+.plantIcon {
+  font-size: 30px;
+}
+
+.plot p {
+  color: #e7e2e0;
+  font-size: 13px;
+}
+
 @media (max-width: 520px) {
   .page {
     padding: 30px 12px 48px;
@@ -198,5 +350,25 @@
 
   .flashcard {
     min-height: 250px;
+  }
+
+  .gardenHeader,
+  .bedsHeading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .shopItems,
+  .plotGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shopItem {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .shopItem > div {
+    min-width: calc(100% - 55px);
   }
 }

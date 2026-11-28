@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { studyDecks } from "../../data/studyDecks";
+import { useGardenGame } from "../../hooks/useGardenGame";
 import styles from "./study.module.css";
 
 export const Study = () => {
+  const { garden, awardPoints, buySeeds, buyWateringCan, plantSeed, waterPlant } =
+    useGardenGame();
   const [deckId, setDeckId] = useState(studyDecks[0].id);
   const [cardIndex, setCardIndex] = useState(0);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -29,6 +32,7 @@ export const Study = () => {
   };
 
   const gradeCard = (gotIt) => {
+    if (gotIt) awardPoints(10);
     setReviewIds((current) =>
       gotIt
         ? current.filter((id) => id !== card.id)
@@ -87,6 +91,9 @@ export const Study = () => {
               {reviewIds.length
                 ? `${reviewIds.length} ${reviewIds.length === 1 ? "card needs" : "cards need"} another look.`
                 : "All cards are marked Got it. Keep practicing to lock in the specs."}
+            </p>
+            <p className={styles.pointsEarned}>
+              Your garden has {garden.points} petal points to spend.
             </p>
             <div className={styles.sessionActions}>
               {reviewIds.length > 0 && (
@@ -173,6 +180,101 @@ export const Study = () => {
             </p>
           </>
         )}
+      </section>
+
+      <section className={styles.gardenPanel} aria-label="Petal patch garden game">
+        <div className={styles.gardenHeader}>
+          <div>
+            <p className={styles.eyebrow}>Study rewards · Garden game</p>
+            <h2>Grow your petal patch</h2>
+            <p>Get a card right to earn 10 petals, then trade them for garden supplies.</p>
+          </div>
+          <p className={styles.pointsBalance} aria-live="polite">
+            🌸 {garden.points} petals
+          </p>
+        </div>
+
+        <div className={styles.gardenShop}>
+          <h3>Garden shop</h3>
+          <div className={styles.shopItems}>
+            <article className={styles.shopItem}>
+              <span aria-hidden="true">🌱</span>
+              <div>
+                <h4>Seed packet</h4>
+                <p>One seed · {garden.seeds} in your bag</p>
+              </div>
+              <button
+                type="button"
+                onClick={buySeeds}
+                disabled={garden.points < 20}
+              >
+                Buy · 20
+              </button>
+            </article>
+            <article className={styles.shopItem}>
+              <span aria-hidden="true">🪴</span>
+              <div>
+                <h4>Watering can</h4>
+                <p>{garden.hasWateringCan ? "Ready to use" : "Water sprouts to bloom"}</p>
+              </div>
+              <button
+                type="button"
+                onClick={buyWateringCan}
+                disabled={garden.points < 40 || garden.hasWateringCan}
+              >
+                {garden.hasWateringCan ? "Owned" : "Buy · 40"}
+              </button>
+            </article>
+          </div>
+        </div>
+
+        <div className={styles.gardenBeds}>
+          <div className={styles.bedsHeading}>
+            <h3>Your garden beds</h3>
+            <p>
+              {garden.hasWateringCan
+                ? "Plant a seed, then water it to help it bloom."
+                : "Plant seeds now; buy a watering can to help them bloom."}
+            </p>
+          </div>
+          <div className={styles.plotGrid}>
+            {garden.plants.map((plant, index) => (
+              <article className={styles.plot} key={index}>
+                <span className={styles.plotNumber}>Plot {index + 1}</span>
+                {plant === null ? (
+                  <>
+                    <span className={styles.plantIcon} aria-hidden="true">🟫</span>
+                    <p>Empty bed</p>
+                    <button
+                      type="button"
+                      onClick={() => plantSeed(index)}
+                      disabled={garden.seeds < 1}
+                    >
+                      Plant seed
+                    </button>
+                  </>
+                ) : plant === "sprout" ? (
+                  <>
+                    <span className={styles.plantIcon} aria-hidden="true">🌱</span>
+                    <p>Little sprout</p>
+                    <button
+                      type="button"
+                      onClick={() => waterPlant(index)}
+                      disabled={!garden.hasWateringCan}
+                    >
+                      {garden.hasWateringCan ? "Water it" : "Need watering can"}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className={styles.plantIcon} aria-hidden="true">🌼</span>
+                    <p>In bloom!</p>
+                  </>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
     </main>
   );
